@@ -9,7 +9,7 @@ class complx{
     int x, y, u, v;
     string s;
     void extract(string);
-    //int extract(string, int, int);
+    int extract(string, int, int);
     void process(complx, complx);
     void input();
     
@@ -18,31 +18,33 @@ class complx{
 };
 
 void complx:: extract(string st){
-    int i=0, j=0, val[2];
+    int i=0, val[2];
     int l=st.length();
-    for( ; i<2; i++){
-        string r,ar;
-        for( ; j<l; j++){
-            ar=st.substr(j,j+1);
-            if(ar=="i"||ar=="+"||ar=="-")
-                break;
+    for( ; i<2; i++)
+    val[i]=extract(st, i+i, l);
+    
+    x=val[0];
+    y=val[1];
+}
+int complx:: extract(string str, int j, int n){
+    string r,ar;
+    int q=j;
+    for( ; j<n; j++){
+        ar=str.substr(j,j+1);
+        if(ar=="i"||ar=="I")
+        break;
+        else if(j!=0&&(ar=="+"||ar=="-")&&q==0)
+        break;
         
-            r+=ar.substr(0,1);
+        r+=ar.substr(0,1);
         
-        }
+    }
     stringstream m(r);
     
     int em=0;
     m>>em;
-    val[i]=em;
-    }
-    x=val[0];
-    y=val[1];
-}
-/*int complx:: extract(string str, int j, int n){
-    
     return em;
-}*/
+}
 void complx:: process(complx no_one, complx no_two){
     int a, b, c, d;
     a = no_one.x;
@@ -73,3 +75,4 @@ int main(){
     obj.output();
     return 0;
 }
+
